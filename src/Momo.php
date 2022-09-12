@@ -24,6 +24,9 @@ class Momo
      */
     private array $data;
 
+    /**
+     * @var string $time
+     */
     private string $time;
 
     /**
@@ -43,6 +46,10 @@ class Momo
         "DETAIL_TRANS" => "https://api.momo.vn/sync/transhis/details",
     ];
 
+    /**
+     * @param string $phone
+     * @param string $password
+     */
     public function __construct(string $phone, string $password)
     {
         $this->phone = $phone;
@@ -117,6 +124,12 @@ class Momo
         return $this->makeRequest();
     }
 
+    /**
+     * Đăng nhập vào MoMo
+     *
+     * @param string $pHash
+     * @return bool|string
+     */
     public function userLogin(string $pHash): bool|string
     {
         $this->msgType = 'USER_LOGIN_MSG';
@@ -139,6 +152,8 @@ class Momo
     }
 
     /**
+     * Tạo microtime
+     *
      * @return string
      */
     private function microtime(): string
@@ -149,6 +164,8 @@ class Momo
     }
 
     /**
+     * Tạo mã secure id
+     *
      * @return string
      */
     private function secureId(): string
@@ -157,6 +174,8 @@ class Momo
     }
 
     /**
+     * Tạo chuỗi ngẫu nhiên
+     *
      * @param int $length
      * @return string
      */
@@ -173,6 +192,8 @@ class Momo
     }
 
     /**
+     * Tạo UUID cho imei
+     *
      * @return string
      */
     private function generateUUID(): string
@@ -187,6 +208,8 @@ class Momo
     }
 
     /**
+     * Tạo request
+     *
      * @return bool|string
      */
     private function makeRequest(): bool|string
@@ -212,6 +235,7 @@ class Momo
     }
 
     /**
+     * Lấy URL theo msgType
      * @return string
      */
     private function getURLMsgType(): string
@@ -220,6 +244,8 @@ class Momo
     }
 
     /**
+     * Set dữ liệu cho request
+     *
      * @param array $data
      * @return void
      */
@@ -229,6 +255,8 @@ class Momo
     }
 
     /**
+     * Tạo mã checksum
+     *
      * @return false|string
      */
     public function generateChecksum(): string|false
@@ -236,6 +264,6 @@ class Momo
         $l = $this->time . '000000';
         $data = $this->phone . $l . $this->msgType . ($this->time / 1e12) . 'E12';
 
-        return @openssl_encrypt($data, 'AES-256-CBC', substr('bef490fc-885a-44bd-89b9-66dd79bc', 0, 32), 0, '');
+        return openssl_encrypt($data, 'AES-256-CBC', substr('bef490fc-885a-44bd-89b9-66dd79bc', 0, 32), 0, '');
     }
 }

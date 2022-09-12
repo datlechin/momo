@@ -14,5 +14,9 @@
             "homepage": "https://ngoquocdat.dev"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-bcmath": "*",
+        "ext-curl": "*",
+        "ext-openssl": "*"
+    }
 }
