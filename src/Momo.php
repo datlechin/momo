@@ -259,7 +259,7 @@ class Momo
      *
      * @return false|string
      */
-    public function generateChecksum(): string|false
+    private function generateChecksum(): string|false
     {
         $l = $this->time . '000000';
         $data = $this->phone . $l . $this->msgType . ($this->time / 1e12) . 'E12';
