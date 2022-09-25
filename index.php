@@ -6,7 +6,7 @@ require_once 'vendor/autoload.php';
  * Bước 1: Khởi tạo Momo
  */
 
-$momo = new Datlechin\Momo\Momo('0372124043', '240403');
+$momo = new Datlechin\Momo\Momo('phone', 'password');
 
 /**
  * Bước 2: Lấy mã OTP được gửi đến số điện thoại
